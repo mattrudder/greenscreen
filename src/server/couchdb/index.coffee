@@ -14,11 +14,17 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 cradle = require "cradle"
 views = require "./views"
+process = require "process"
 validations = require "./validations"
 
 module.exports = class CouchDB
   constructor: (config) ->
-    @couch = new cradle.Connection config.host, config.port
+    cradelOptions =
+      auth:
+        username: process.env.COUCH_USERNAME
+        password: process.env.COUCH_PASS
+
+    @couch = new cradle.Connection config.host, config.port, cradleOptions
     @db = @couch.database config.db
     @ensureDbExists =>
       @installDesignDoc()
