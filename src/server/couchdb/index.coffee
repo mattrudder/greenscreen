@@ -24,7 +24,7 @@ module.exports = class CouchDB
         username: process.env.COUCH_USERNAME
         password: process.env.COUCH_PASS
 
-    @couch = new cradle.Connection config.host, config.port, cradleOptions
+    @couch = new cradle.Connection config.host ? process.env.COUCH_HOST, config.port ? process.env.COUCH_PORT, cradleOptions
     @db = @couch.database config.db
     @ensureDbExists =>
       @installDesignDoc()
