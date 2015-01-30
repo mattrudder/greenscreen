@@ -19,7 +19,7 @@ validations = require "./validations"
 
 module.exports = class CouchDB
   constructor: (config) ->
-    cradelOptions =
+    cradleOptions =
       auth:
         username: process.env.COUCH_USERNAME
         password: process.env.COUCH_PASS
